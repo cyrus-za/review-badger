@@ -1,0 +1,36 @@
+{
+  "name": "pr-review-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicklemmon/pr-review-bot.git"
+  },
+  "author": "Nick Lemmon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicklemmon/pr-review-bot/issues"
+  },
+  "homepage": "https://github.com/nicklemmon/pr-review-bot#readme",
+  "dependencies": {
+    "axios": "^0.20.0"
+  },
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.3.0",
+    "prettier": "2.1.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
+  }
+}
