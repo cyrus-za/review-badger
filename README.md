@@ -1,1 +1,1 @@
-# pr-review-bot
+# PR Review Bot
