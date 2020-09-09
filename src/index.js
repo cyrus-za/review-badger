@@ -1,4 +1,4 @@
-import { getPRs, postSlackMsg } from './api.js'
+const { getPRs, postSlackMsg } = require('./api.js')
 
 function getIntroMsg(numberOfPRs) {
   if (numberOfPRs === 1) return 'There is 1 PR that still needs a reviewer.'

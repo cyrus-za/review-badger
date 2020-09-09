@@ -1,12 +1,12 @@
-import axios from 'axios'
-import {
+const axios = require('axios')
+const {
   GITHUB_AUTH_HEADER,
   GITHUB_API_URL,
   GITHUB_ORG,
   GITHUB_REPO,
   SLACK_WEBHOOK_URL,
   SLACK_CHANNEL,
-} from './constants.js'
+} = require('./constants.js')
 
 export function getPRs() {
   return axios({
