@@ -2,13 +2,15 @@ const axios = require('axios')
 const {
   GITHUB_AUTH_HEADER,
   GITHUB_API_URL,
-  GITHUB_REPO,
+  GITHUB_REPOSITORY,
   SLACK_WEBHOOK_URL,
   SLACK_CHANNEL,
 } = require('./constants.js')
 
 function getPRs() {
-  if (!GITHUB_REPO)
+  console.log('process.env', process.env)
+
+  if (!GITHUB_REPOSITORY)
     throw new Error('No GitHub repository supplied - pull requests cannot be retrieved.')
 
   return axios({
