@@ -2610,7 +2610,6 @@ module.exports = /******/ (function (modules, runtime) {
         GITHUB_API_URL,
         GITHUB_TOKEN,
         GITHUB_AUTH_HEADER,
-        GITHUB_REPOSITORY,
         SLACK_WEBHOOK_URL,
         SLACK_CHANNEL,
       }
