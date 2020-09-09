@@ -1476,20 +1476,19 @@ module.exports = /******/ (function (modules, runtime) {
       const {
         GITHUB_AUTH_HEADER,
         GITHUB_API_URL,
-        GITHUB_REPO,
         SLACK_WEBHOOK_URL,
         SLACK_CHANNEL,
       } = __webpack_require__(648)
+      const { GITHUB_REPOSITORY } = process.env
 
       function getPRs() {
-        if (!GITHUB_REPO)
-          throw new Error('No GitHub repository supplied - pull requests cannot be retrieved.')
+        console.log('GITHUB_REPOSITORY', GITHUB_REPOSITORY)
 
         return axios({
           method: 'GET',
-          url: `${GITHUB_API_URL}/repos/${GITHUB_REPO}/pulls`,
+          url: `${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls`,
           headers: GITHUB_AUTH_HEADER,
-        })
+        }).catch(err => console.log(err))
       }
 
       function postSlackMsg({ text, blocks } = {}) {
@@ -1508,7 +1507,7 @@ module.exports = /******/ (function (modules, runtime) {
             text,
             blocks,
           },
-        })
+        }).catch(err => console.log(err))
       }
 
       module.exports = {
@@ -2602,17 +2601,16 @@ module.exports = /******/ (function (modules, runtime) {
 
     /***/ 648: /***/ function (module) {
       const GITHUB_API_URL = 'https://api.github.com'
-      const GITHUB_API_TOKEN = process.env.GITHUB_API_TOKEN
-      const GITHUB_AUTH_HEADER = { Authorization: `token ${GITHUB_API_TOKEN}` }
-      const GITHUB_REPO = process.env.GITHUB_REPO
+      const GITHUB_TOKEN = process.env.GITHUB_TOKEN
+      const GITHUB_AUTH_HEADER = { Authorization: `token ${GITHUB_TOKEN}` }
       const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL
       const SLACK_CHANNEL = process.env.SLACK_CHANNEL
 
       module.exports = {
         GITHUB_API_URL,
-        GITHUB_API_TOKEN,
+        GITHUB_TOKEN,
         GITHUB_AUTH_HEADER,
-        GITHUB_REPO,
+        GITHUB_REPOSITORY,
         SLACK_WEBHOOK_URL,
         SLACK_CHANNEL,
       }

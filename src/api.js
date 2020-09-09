@@ -8,16 +8,13 @@ const {
 const { GITHUB_REPOSITORY } = process.env
 
 function getPRs() {
-  console.log('process.env', process.env)
-
-  if (!GITHUB_REPOSITORY)
-    throw new Error('No GitHub repository supplied - pull requests cannot be retrieved.')
+  console.log('GITHUB_REPOSITORY', GITHUB_REPOSITORY)
 
   return axios({
     method: 'GET',
     url: `${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls`,
     headers: GITHUB_AUTH_HEADER,
-  })
+  }).catch(err => console.log(err))
 }
 
 function postSlackMsg({ text, blocks } = {}) {
@@ -35,7 +32,7 @@ function postSlackMsg({ text, blocks } = {}) {
       text,
       blocks,
     },
-  })
+  }).catch(err => console.log(err))
 }
 
 module.exports = {
