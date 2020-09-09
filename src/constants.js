@@ -1,13 +1,13 @@
 const GITHUB_API_URL = 'https://api.github.com'
-const GITHUB_API_TOKEN = process.env.GITHUB_API_TOKEN
-const GITHUB_AUTH_HEADER = { Authorization: `token ${GITHUB_API_TOKEN}` }
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN
+const GITHUB_AUTH_HEADER = { Authorization: `token ${GITHUB_TOKEN}` }
 const GITHUB_REPO = process.env.GITHUB_REPO
 const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL
 const SLACK_CHANNEL = process.env.SLACK_CHANNEL
 
 module.exports = {
   GITHUB_API_URL,
-  GITHUB_API_TOKEN,
+  GITHUB_TOKEN,
   GITHUB_AUTH_HEADER,
   GITHUB_REPO,
   SLACK_WEBHOOK_URL,
