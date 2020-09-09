@@ -12,5 +12,5 @@ inputs:
     required: false
     default: '#general'
 runs:
-  using: 'node14'
+  using: 'node12'
   main: './src/index.js'
