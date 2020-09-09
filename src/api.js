@@ -8,7 +8,7 @@ const {
   SLACK_CHANNEL,
 } = require('./constants.js')
 
-export function getPRs() {
+function getPRs() {
   return axios({
     method: 'GET',
     url: `${GITHUB_API_URL}/repos/${GITHUB_REPO}/pulls`,
@@ -16,7 +16,7 @@ export function getPRs() {
   })
 }
 
-export function postSlackMsg({ text, blocks } = {}) {
+function postSlackMsg({ text, blocks } = {}) {
   return axios({
     method: 'POST',
     url: SLACK_WEBHOOK_URL,
@@ -27,4 +27,9 @@ export function postSlackMsg({ text, blocks } = {}) {
       blocks,
     },
   })
+}
+
+module.exports = {
+  getPRs,
+  postSlackMsg,
 }
