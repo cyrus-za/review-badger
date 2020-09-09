@@ -11,7 +11,7 @@ import {
 export function getPRs() {
   return axios({
     method: 'GET',
-    url: `${GITHUB_API_URL}/repos/${GITHUB_ORG}/${GITHUB_REPO}/pulls`,
+    url: `${GITHUB_API_URL}/repos/${GITHUB_REPO}/pulls`,
     headers: GITHUB_AUTH_HEADER,
   })
 }
