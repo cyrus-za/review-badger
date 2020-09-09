@@ -1,16 +1,10 @@
 name: 'Review Badger'
 description: 'Badger your team to pick up reviews'
+
 branding:
   icon: 'bell'
   color: 'purple'
-inputs:
-  slack-webhook-url:
-    description: 'Slack app webhook URL'
-    required: true
-  slack-channel:
-    description: 'Channel name'
-    required: false
-    default: '#general'
+
 runs:
   using: 'node12'
   main: 'dist/index.js'
