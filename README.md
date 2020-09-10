@@ -14,9 +14,11 @@ jobs:
   pr-reviews-reminder:
     runs-on: ubuntu-latest
     steps:
-      - uses: nicklemmon/review-badger@v0.0.1
-        env:
-          GITHUB_API_TOKEN: ${{ secrets.GITHUB_API_TOKEN }}
-          GITHUB_REPO: ${{ secrets.GITHUB_REPOSITORY }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      uses: nicklemmon/review-badger@v0.0.16-alpha
+      env:
+        GITHUB_API_TOKEN: ${{ secrets.GITHUB_API_TOKEN }}
+        GITHUB_REPO: ${{ secrets.GITHUB_REPOSITORY }}
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      with:
+        slackChannel: '#general'
 ```
