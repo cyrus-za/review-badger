@@ -5,6 +5,11 @@ branding:
   icon: 'bell'
   color: 'purple'
 
+inputs:
+  slackChannel:
+    description: 'Slack Channel that will see posted Review Badger messages'
+    required: true
+
 runs:
   using: 'node12'
   main: 'dist/index.js'

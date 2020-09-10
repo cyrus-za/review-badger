@@ -21,7 +21,7 @@ async function start() {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `*Good morning, FE Guild!* \n ${introMsg}`,
+            text: `*A wild Review Badger appeared!* \n ${introMsg}`,
           },
         },
         ...PRsNeedingReview.map(PR => {

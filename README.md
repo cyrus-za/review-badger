@@ -19,5 +19,4 @@ jobs:
           GITHUB_API_TOKEN: ${{ secrets.GITHUB_API_TOKEN }}
           GITHUB_REPO: ${{ secrets.GITHUB_REPOSITORY }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
 ```
