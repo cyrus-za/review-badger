@@ -1473,17 +1473,10 @@ module.exports = /******/ (function (modules, runtime) {
 
     /***/ 378: /***/ function (module, __unusedexports, __webpack_require__) {
       const axios = __webpack_require__(53)
-      const {
-        GITHUB_AUTH_HEADER,
-        GITHUB_API_URL,
-        SLACK_WEBHOOK_URL,
-        SLACK_CHANNEL,
-      } = __webpack_require__(648)
-      const { GITHUB_REPOSITORY } = process.env
+      const { GITHUB_AUTH_HEADER, GITHUB_API_URL, SLACK_WEBHOOK_URL } = __webpack_require__(648)
+      const { GITHUB_REPOSITORY, INPUT_SLACK_CHANNEL } = process.env
 
       function getPRs() {
-        console.log('GITHUB_REPOSITORY', GITHUB_REPOSITORY)
-
         return axios({
           method: 'GET',
           url: `${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls`,
@@ -1495,14 +1488,14 @@ module.exports = /******/ (function (modules, runtime) {
         if (!SLACK_WEBHOOK_URL)
           throw new Error('No SLACK_WEBHOOK_URL supplied - messages cannot be posted.')
 
-        if (!SLACK_CHANNEL)
-          throw new Error('No SLACK_CHANNEL supplied - messages cannot be posted.')
+        if (!INPUT_SLACK_CHANNEL)
+          throw new Error('No slackChannel supplied - messages cannot be posted.')
 
         return axios({
           method: 'POST',
           url: SLACK_WEBHOOK_URL,
           data: {
-            channel: SLACK_CHANNEL,
+            channel: INPUT_SLACK_CHANNEL,
             username: 'Review Badger',
             text,
             blocks,
@@ -2972,7 +2965,7 @@ module.exports = /******/ (function (modules, runtime) {
                 type: 'section',
                 text: {
                   type: 'mrkdwn',
-                  text: `*Good morning, FE Guild!* \n ${introMsg}`,
+                  text: `*A wild Review Badger appeared!* \n ${introMsg}`,
                 },
               },
               ...PRsNeedingReview.map(PR => {
