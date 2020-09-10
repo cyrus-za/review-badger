@@ -2954,7 +2954,7 @@ module.exports = /******/ (function (modules, runtime) {
         const { data } = await getPRs()
         const PRsNeedingReview = data
           .filter(PR => PR.requested_reviewers.length === 0 && PR.draft === false)
-          .filter(PR => PR.user.login !== 'nicklemmon')
+          .filter(PR => PR.user.login !== 'dependabot[bot]')
 
         if (PRsNeedingReview.length > 0) {
           const introMsg = getIntroMsg(PRsNeedingReview.length)
