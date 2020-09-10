@@ -1476,6 +1476,8 @@ module.exports = /******/ (function (modules, runtime) {
       const { GITHUB_AUTH_HEADER, GITHUB_API_URL, SLACK_WEBHOOK_URL } = __webpack_require__(648)
       const { GITHUB_REPOSITORY, INPUT_SLACK_CHANNEL } = process.env
 
+      console.log('process.env', process.env)
+
       function getPRs() {
         return axios({
           method: 'GET',

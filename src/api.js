@@ -2,6 +2,8 @@ const axios = require('axios')
 const { GITHUB_AUTH_HEADER, GITHUB_API_URL, SLACK_WEBHOOK_URL } = require('./constants.js')
 const { GITHUB_REPOSITORY, INPUT_SLACK_CHANNEL } = process.env
 
+console.log('process.env', process.env)
+
 function getPRs() {
   return axios({
     method: 'GET',
