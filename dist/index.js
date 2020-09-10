@@ -2952,9 +2952,9 @@ module.exports = /******/ (function (modules, runtime) {
 
       async function start() {
         const { data } = await getPRs()
-        const PRsNeedingReview = data.filter(
-          PR => PR.requested_reviewers.length === 0 && PR.draft === false,
-        )
+        const PRsNeedingReview = data
+          .filter(PR => PR.requested_reviewers.length === 0 && PR.draft === false)
+          .filter(PR => PR.user.login !== 'nicklemmon')
 
         if (PRsNeedingReview.length > 0) {
           const introMsg = getIntroMsg(PRsNeedingReview.length)
