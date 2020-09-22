@@ -2947,7 +2947,7 @@ module.exports = /******/ (function (modules, runtime) {
       function getIntroMsg(numberOfPRs) {
         if (numberOfPRs === 1) return 'There is 1 PR that still needs a reviewer.'
 
-        return `There are ${numberOfPRs} PRs that still reviewers.`
+        return `There are ${numberOfPRs} PRs that still need reviewers.`
       }
 
       async function start() {
