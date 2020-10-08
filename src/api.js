@@ -17,6 +17,16 @@ function getPRs() {
   }).catch(err => console.log(err))
 }
 
+function getPR(pullNumber) {
+  return axios({
+    method: 'GET',
+    url: `${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${pullNumber}`,
+    headers: {
+      Authorization: GITHUB_TOKEN,
+    },
+  }).catch(err => console.log(err))
+}
+
 function postSlackMsg({ text, blocks } = {}) {
   if (!SLACK_WEBHOOK_URL)
     throw new Error('No SLACK_WEBHOOK_URL supplied - messages cannot be posted.')
@@ -37,5 +47,6 @@ function postSlackMsg({ text, blocks } = {}) {
 
 module.exports = {
   getPRs,
+  getPR,
   postSlackMsg,
 }

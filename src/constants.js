@@ -5,6 +5,8 @@ const GITHUB_AUTH_HEADER = { Authorization: `${GITHUB_TOKEN}` }
 const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL
 const SLACK_CHANNEL = process.env.SLACK_CHANNEL || process.env.INPUT_SLACKCHANNEL
 
+console.log('GITHUB_TOKEN', GITHUB_TOKEN)
+
 module.exports = {
   GITHUB_API_URL,
   GITHUB_REPOSITORY,

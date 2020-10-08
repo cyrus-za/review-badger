@@ -1,17 +1,19 @@
 const { formatDistanceToNow } = require('date-fns')
-const { getPRs, postSlackMsg, getPR } = require('./api.js')
+const { getPRs, postSlackMsg } = require('./api.js')
 
 function getIntroMsg(numberOfPRs) {
-  if (numberOfPRs === 1) return 'There is 1 PR that still needs to be reviewed.'
+  if (numberOfPRs === 1) return 'There is 1 PR that still needs to be reviewed or re-reviewed.'
 
-  return `There are ${numberOfPRs} PRs that still need to be reviewed.`
+  return `There are ${numberOfPRs} PRs that still need to be reviewed or re-reviewed.`
 }
 
 async function start() {
   const { data } = await getPRs()
   const PRsNeedingReview = data
-    .filter(PR => PR.requested_reviewers.length === 0 && PR.draft === false)
     .filter(PR => PR.user.login !== 'dependabot[bot]')
+    .filter(
+      PR => PR.assignees.length === 0 && PR.requested_reviewers.length === 0 && PR.draft === false,
+    )
 
   if (PRsNeedingReview.length > 0) {
     const introMsg = getIntroMsg(PRsNeedingReview.length)
@@ -25,18 +27,34 @@ async function start() {
             text: `*A wild Review Badger appeared!* \n ${introMsg}`,
           },
         },
-        ...PRsNeedingReview.map(PR => {
-          const { html_url, title, created_at } = PR
-          const timeSinceCreation = formatDistanceToNow(new Date(created_at))
+        ...[].concat(
+          ...PRsNeedingReview.map(PR => {
+            const { html_url, title, created_at, number } = PR
+            const timeSinceCreation = formatDistanceToNow(new Date(created_at))
 
-          return {
-            type: 'section',
-            text: {
-              type: 'mrkdwn',
-              text: `<${html_url}|:point_right: ${title}> _${timeSinceCreation} since pull request was opened_`,
-            },
-          }
-        }),
+            return [
+              {
+                type: 'divider',
+              },
+              {
+                type: 'section',
+                text: {
+                  type: 'mrkdwn',
+                  text: `*<${html_url}|:point_right: ${title}>*`,
+                },
+              },
+              {
+                type: 'context',
+                elements: [
+                  {
+                    type: 'mrkdwn',
+                    text: `_${timeSinceCreation}_ since pull request was opened`,
+                  },
+                ],
+              },
+            ]
+          }),
+        ),
       ],
     })
   }
