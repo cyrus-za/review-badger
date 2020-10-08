@@ -8620,6 +8620,8 @@ module.exports = /******/ (function (modules, runtime) {
       const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL
       const SLACK_CHANNEL = process.env.SLACK_CHANNEL || process.env.INPUT_SLACKCHANNEL
 
+      console.log('GITHUB_TOKEN', GITHUB_TOKEN)
+
       module.exports = {
         GITHUB_API_URL,
         GITHUB_REPOSITORY,
@@ -14092,6 +14094,16 @@ module.exports = /******/ (function (modules, runtime) {
         }).catch(err => console.log(err))
       }
 
+      function getPR(pullNumber) {
+        return axios({
+          method: 'GET',
+          url: `${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${pullNumber}`,
+          headers: {
+            Authorization: GITHUB_TOKEN,
+          },
+        }).catch(err => console.log(err))
+      }
+
       function postSlackMsg({ text, blocks } = {}) {
         if (!SLACK_WEBHOOK_URL)
           throw new Error('No SLACK_WEBHOOK_URL supplied - messages cannot be posted.')
@@ -14112,6 +14124,7 @@ module.exports = /******/ (function (modules, runtime) {
 
       module.exports = {
         getPRs,
+        getPR,
         postSlackMsg,
       }
 
@@ -16243,19 +16256,25 @@ module.exports = /******/ (function (modules, runtime) {
     /* 674 */ /* 675 */ /* 676 */
     /***/ function (__unusedmodule, __unusedexports, __webpack_require__) {
       const { formatDistanceToNow } = __webpack_require__(684)
-      const { getPRs, postSlackMsg, getPR } = __webpack_require__(570)
+      const { getPRs, postSlackMsg } = __webpack_require__(570)
 
       function getIntroMsg(numberOfPRs) {
-        if (numberOfPRs === 1) return 'There is 1 PR that still needs to be reviewed.'
+        if (numberOfPRs === 1)
+          return 'There is 1 PR that still needs to be reviewed or re-reviewed.'
 
-        return `There are ${numberOfPRs} PRs that still need to be reviewed.`
+        return `There are ${numberOfPRs} PRs that still need to be reviewed or re-reviewed.`
       }
 
       async function start() {
         const { data } = await getPRs()
         const PRsNeedingReview = data
-          .filter(PR => PR.requested_reviewers.length === 0 && PR.draft === false)
           .filter(PR => PR.user.login !== 'dependabot[bot]')
+          .filter(
+            PR =>
+              PR.assignees.length === 0 &&
+              PR.requested_reviewers.length === 0 &&
+              PR.draft === false,
+          )
 
         if (PRsNeedingReview.length > 0) {
           const introMsg = getIntroMsg(PRsNeedingReview.length)
@@ -16269,18 +16288,34 @@ module.exports = /******/ (function (modules, runtime) {
                   text: `*A wild Review Badger appeared!* \n ${introMsg}`,
                 },
               },
-              ...PRsNeedingReview.map(PR => {
-                const { html_url, title, created_at } = PR
-                const timeSinceCreation = formatDistanceToNow(new Date(created_at))
+              ...[].concat(
+                ...PRsNeedingReview.map(PR => {
+                  const { html_url, title, created_at, number } = PR
+                  const timeSinceCreation = formatDistanceToNow(new Date(created_at))
 
-                return {
-                  type: 'section',
-                  text: {
-                    type: 'mrkdwn',
-                    text: `<${html_url}|:point_right: ${title}> _${timeSinceCreation} since pull request was opened_`,
-                  },
-                }
-              }),
+                  return [
+                    {
+                      type: 'divider',
+                    },
+                    {
+                      type: 'section',
+                      text: {
+                        type: 'mrkdwn',
+                        text: `*<${html_url}|:point_right: ${title}>*`,
+                      },
+                    },
+                    {
+                      type: 'context',
+                      elements: [
+                        {
+                          type: 'mrkdwn',
+                          text: `_${timeSinceCreation}_ since pull request was opened`,
+                        },
+                      ],
+                    },
+                  ]
+                }),
+              ),
             ],
           })
         }
