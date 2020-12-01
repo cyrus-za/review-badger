@@ -1,5 +1,6 @@
 const { formatDistanceToNow } = require('date-fns')
 const { getPRs, postSlackMsg } = require('./api.js')
+const { GITHUB_REPOSITORY } = require('./constants.js')
 
 function getIntroMsg(numberOfPRs) {
   if (numberOfPRs === 1) return 'There is 1 PR that still needs to be reviewed or re-reviewed.'
@@ -24,7 +25,7 @@ async function start() {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `*A wild Review Badger appeared!* \n ${introMsg}`,
+            text: `*A wild Review Badger appeared!* \n ${introMsg} \n for the repo ${GITHUB_REPOSITORY}`,
           },
         },
         ...[].concat(
