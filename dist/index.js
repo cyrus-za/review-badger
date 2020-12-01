@@ -16257,6 +16257,7 @@ module.exports = /******/ (function (modules, runtime) {
     /***/ function (__unusedmodule, __unusedexports, __webpack_require__) {
       const { formatDistanceToNow } = __webpack_require__(684)
       const { getPRs, postSlackMsg } = __webpack_require__(570)
+      const { GITHUB_REPOSITORY } = __webpack_require__(326)
 
       function getIntroMsg(numberOfPRs) {
         if (numberOfPRs === 1)
@@ -16285,7 +16286,7 @@ module.exports = /******/ (function (modules, runtime) {
                 type: 'section',
                 text: {
                   type: 'mrkdwn',
-                  text: `*A wild Review Badger appeared!* \n ${introMsg}`,
+                  text: `*A wild Review Badger appeared!* \n ${introMsg} \n for the repo ${GITHUB_REPOSITORY}`,
                 },
               },
               ...[].concat(
