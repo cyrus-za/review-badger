@@ -16261,9 +16261,9 @@ module.exports = /******/ (function (modules, runtime) {
 
       function getIntroMsg(numberOfPRs) {
         if (numberOfPRs === 1)
-          return 'There is 1 PR that still needs to be reviewed or re-reviewed.'
+          return `There is 1 PR that still needs to be reviewed or re-reviewed for the repo *${GITHUB_REPOSITORY}*.`
 
-        return `There are ${numberOfPRs} PRs that still need to be reviewed or re-reviewed.`
+        return `There are ${numberOfPRs} PRs that still need to be reviewed or re-reviewed for the repo *${GITHUB_REPOSITORY}*.`
       }
 
       async function start() {
@@ -16286,7 +16286,7 @@ module.exports = /******/ (function (modules, runtime) {
                 type: 'section',
                 text: {
                   type: 'mrkdwn',
-                  text: `*A wild Review Badger appeared!* \n ${introMsg} \n for the repo ${GITHUB_REPOSITORY}`,
+                  text: `*A wild Review Badger appeared!* \n ${introMsg}`,
                 },
               },
               ...[].concat(
