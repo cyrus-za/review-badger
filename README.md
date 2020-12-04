@@ -17,7 +17,7 @@ jobs:
       uses: nicklemmon/review-badger@v1.0.1
       env:
         GITHUB_API_TOKEN: ${{ secrets.GITHUB_API_TOKEN }}
-        GITHUB_REPO: ${{ secrets.GITHUB_REPOSITORY }}
+        GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       with:
         slackChannel: '#general'
