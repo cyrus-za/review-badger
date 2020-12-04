@@ -1,5 +1,5 @@
 {
-  "name": "pr-review-bot",
+  "name": "review-badger",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nicklemmon/pr-review-bot.git"
+    "url": "git+https://github.com/nicklemmon/review-badger.git"
   },
   "author": "Nick Lemmon",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nicklemmon/pr-review-bot/issues"
+    "url": "https://github.com/nicklemmon/review-badger/issues"
   },
-  "homepage": "https://github.com/nicklemmon/pr-review-bot#readme",
+  "homepage": "https://github.com/nicklemmon/review-badger#readme",
   "dependencies": {
     "axios": "^0.20.0",
     "date-fns": "^2.16.1"
@@ -26,10 +26,8 @@
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.5",
     "lint-staged": "^10.3.0",
