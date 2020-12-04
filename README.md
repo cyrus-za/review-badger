@@ -1,9 +1,9 @@
-# PR Review Bot
+# Review Badger
 
 ## Example Usage
 
 ```yml
-name: PR Reviews Reminder
+name: Review Badger
 
 on:
   schedule:
