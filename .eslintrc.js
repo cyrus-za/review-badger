@@ -18,5 +18,6 @@ module.exports = {
         ignoreRestSiblings: true,
       },
     ],
+    camelcase: 'off',
   },
 }

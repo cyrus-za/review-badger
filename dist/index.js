@@ -8620,8 +8620,6 @@ module.exports = /******/ (function (modules, runtime) {
       const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL
       const SLACK_CHANNEL = process.env.SLACK_CHANNEL || process.env.INPUT_SLACKCHANNEL
 
-      console.log('GITHUB_TOKEN', GITHUB_TOKEN)
-
       module.exports = {
         GITHUB_API_URL,
         GITHUB_REPOSITORY,
@@ -9032,7 +9030,7 @@ module.exports = /******/ (function (modules, runtime) {
     /* 358 */ /* 359 */ /* 360 */ /* 361 */
     /***/ function (module) {
       module.exports = {
-        _args: [['axios@0.20.0', '/Users/nicklemmon/dev/review-badger']],
+        _args: [['axios@0.20.0', '/Users/nlemmon/dev/review-badger']],
         _from: 'axios@0.20.0',
         _id: 'axios@0.20.0',
         _inBundle: false,
@@ -9053,7 +9051,7 @@ module.exports = /******/ (function (modules, runtime) {
         _requiredBy: ['/'],
         _resolved: 'https://registry.npmjs.org/axios/-/axios-0.20.0.tgz',
         _spec: '0.20.0',
-        _where: '/Users/nicklemmon/dev/review-badger',
+        _where: '/Users/nlemmon/dev/review-badger',
         author: { name: 'Matt Zabriskie' },
         browser: { './lib/adapters/http.js': './lib/adapters/xhr.js' },
         bugs: { url: 'https://github.com/axios/axios/issues' },
@@ -16291,7 +16289,7 @@ module.exports = /******/ (function (modules, runtime) {
               },
               ...[].concat(
                 ...PRsNeedingReview.map(PR => {
-                  const { html_url, title, created_at, number } = PR
+                  const { html_url, title, created_at } = PR
                   const timeSinceCreation = formatDistanceToNow(new Date(created_at))
 
                   return [

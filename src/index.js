@@ -31,7 +31,7 @@ async function start() {
         },
         ...[].concat(
           ...PRsNeedingReview.map(PR => {
-            const { html_url, title, created_at, number } = PR
+            const { html_url, title, created_at } = PR
             const timeSinceCreation = formatDistanceToNow(new Date(created_at))
 
             return [
