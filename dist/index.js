@@ -9030,7 +9030,7 @@ module.exports = /******/ (function (modules, runtime) {
     /* 358 */ /* 359 */ /* 360 */ /* 361 */
     /***/ function (module) {
       module.exports = {
-        _args: [['axios@0.20.0', '/Users/nlemmon/dev/review-badger']],
+        _args: [['axios@0.20.0', '/Users/nicklemmon/dev/review-badger']],
         _from: 'axios@0.20.0',
         _id: 'axios@0.20.0',
         _inBundle: false,
@@ -9051,7 +9051,7 @@ module.exports = /******/ (function (modules, runtime) {
         _requiredBy: ['/'],
         _resolved: 'https://registry.npmjs.org/axios/-/axios-0.20.0.tgz',
         _spec: '0.20.0',
-        _where: '/Users/nlemmon/dev/review-badger',
+        _where: '/Users/nicklemmon/dev/review-badger',
         author: { name: 'Matt Zabriskie' },
         browser: { './lib/adapters/http.js': './lib/adapters/xhr.js' },
         bugs: { url: 'https://github.com/axios/axios/issues' },
@@ -14097,7 +14097,7 @@ module.exports = /******/ (function (modules, runtime) {
           method: 'GET',
           url: `${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${pullNumber}`,
           headers: {
-            Authorization: GITHUB_TOKEN,
+            Authorization: `token: ${GITHUB_TOKEN}`,
           },
         }).catch(err => console.log(err))
       }
