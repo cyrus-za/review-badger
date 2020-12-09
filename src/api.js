@@ -22,7 +22,7 @@ function getPR(pullNumber) {
     method: 'GET',
     url: `${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${pullNumber}`,
     headers: {
-      Authorization: GITHUB_TOKEN,
+      Authorization: `token: ${GITHUB_TOKEN}`,
     },
   }).catch(err => console.log(err))
 }
