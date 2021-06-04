@@ -33,7 +33,7 @@ async function start() {
         },
         ...[].concat(
           ...PRsNeedingReview.map(PR => {
-            const { html_url, title, created_at } = PR
+            const { html_url, title, created_at, user } = PR
             const timeSinceCreation = formatDistanceToNow(new Date(created_at))
 
             return [
@@ -45,6 +45,18 @@ async function start() {
                 text: {
                   type: 'mrkdwn',
                   text: `*<${html_url}|:point_right: ${title}>*`,
+                },
+              },
+              {
+                type: 'section',
+                text: {
+                  type: 'mrkdwn',
+                  text: `Author: <${user.url}|${user.login}> \n :technologies: \n`,
+                },
+                accessory: {
+                  type: 'image',
+                  image_url: user.avatar_url,
+                  alt_text: user.login,
                 },
               },
               {
