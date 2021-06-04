@@ -9,10 +9,12 @@ function getIntroMsg(numberOfPRs) {
   return `There are ${numberOfPRs} PRs that still need to be reviewed or re-reviewed for the repo *${GITHUB_REPOSITORY}*.`
 }
 
+const IGNORED_AUTHORS = ['dependabot[bot]', 'renovate[bot]', 'renovate']
+
 async function start() {
   const { data } = await getPRs()
   const PRsNeedingReview = data
-    .filter(PR => PR.user.login !== 'dependabot[bot]')
+    .filter(PR => !IGNORED_AUTHORS.inclues(PR.user.login))
     .filter(
       PR => PR.assignees.length === 0 && PR.requested_reviewers.length === 0 && PR.draft === false,
     )
